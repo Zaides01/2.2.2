@@ -3,28 +3,13 @@ package com.company;
 public class Vector2D {
     double vX;
     double vY;
+    static int count = 0;
     //служебные методы: сеторы, гетеры, кострукторы
-
-
-    public void setvX(double vX) {
-        this.vX = vX;
-    }
-
-    public void setvY(double vY) {
-        this.vY = vY;
-    }
-
-    public double getvX() {
-        return vX;
-    }
-
-    public double getvY() {
-        return vY;
-    }
 
     public Vector2D(){
         vX=1;
         vY=1;
+        count++;
     }
 
     public Vector2D(double vX, double vY) {
@@ -35,6 +20,7 @@ public class Vector2D {
     public Vector2D(Vector2D vectorForCopy){
         vX = vectorForCopy.vX;
         vY = vectorForCopy.vY;
+        count++;
     }
     //вычислительные методы
 
@@ -43,24 +29,30 @@ public class Vector2D {
         return rez;
     }
 
-    public Vector2D add(Vector2D secondvector){
-        Vector2D rez = new Vector2D();
-        rez.vX = this.vX + secondvector.vX;
-        rez.vY = this.vY + secondvector.vY;
-        return rez;
+    public void add(Vector2D secondvector){
+        this.vX = this.vX + secondvector.vX;
+        this.vY = this.vY + secondvector.vY;
     }
 
-    public Vector2D sub (Vector2D secondvector){
-        Vector2D rez = new Vector2D();
-        rez.vX = this.vX - secondvector.vX;
-        rez.vY = this.vY - secondvector.vY;
-        return rez;
+    public void sub (Vector2D secondvector){
+        this.vX = this.vX - secondvector.vX;
+        this.vY = this.vY - secondvector.vY;
     }
 
-    public Vector2D scale (double scaleFactor){
-        Vector2D rez = new Vector2D();
-        rez.vX = this.vX*scaleFactor;
-        rez.vY = this.vY*scaleFactor;
+    public void scale (double scaleFactor){
+        this.vX = this.vX*scaleFactor;
+        this.vY = this.vY*scaleFactor;
+    }
+
+    public void normalized (){
+        double a = Math.sqrt(this.vX*this.vX + this.vY*this.vY);
+        this.vX = this.vX/a;
+        this.vY = this.vY/a;
+        count++;
+    }
+
+    public double dotProduct (Vector2D secondvector){
+        double rez = this.vX* secondvector.vX + this.vY* secondvector.vY;
         return rez;
     }
 
